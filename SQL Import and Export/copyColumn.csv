@@ -1,0 +1,17 @@
+DepartmentID,Name,GroupName,ModifiedDate,DepartmentName
+1,Engineering,Research and Development,2008-04-30 00:00:00,Engineering
+2,Tool Design,Research and Development,2008-04-30 00:00:00,Tool Design
+3,Sales,Sales and Marketing,2008-04-30 00:00:00,Sales
+4,Marketing,Sales and Marketing,2008-04-30 00:00:00,Marketing
+5,Purchasing,Inventory Management,2008-04-30 00:00:00,Purchasing
+6,Research and Development,Research and Development,2008-04-30 00:00:00,Research and Development
+7,Production,Manufacturing,2008-04-30 00:00:00,Production
+8,Production Control,Manufacturing,2008-04-30 00:00:00,Production Control
+9,Human Resources,Executive General and Administration,2008-04-30 00:00:00,Human Resources
+10,Finance,Executive General and Administration,2008-04-30 00:00:00,Finance
+11,Information Services,Executive General and Administration,2008-04-30 00:00:00,Information Services
+12,Document Control,Quality Assurance,2008-04-30 00:00:00,Document Control
+13,Quality Assurance,Quality Assurance,2008-04-30 00:00:00,Quality Assurance
+14,Facilities and Maintenance,Executive General and Administration,2008-04-30 00:00:00,Facilities and Maintenance
+15,Shipping and Receiving,Inventory Management,2008-04-30 00:00:00,Shipping and Receiving
+16,Executive,Executive General and Administration,2008-04-30 00:00:00,Executive

@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/14/2019 11:23:13 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MYLENOVOI7"
+  DTS:CreatorName="MYLENOVOI7\KameswaraSarma"
+  DTS:DTSID="{413479BD-0C2B-4216-BE42-25C789692930}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="Package2"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{809B4A36-B3F0-4523-9A31-8DA8DBF9419A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ADLA Connection Manager]"
+      DTS:CreationName="AzureDataLakeAnalytics"
+      DTS:DTSID="{14EACF20-A67D-4B64-BDE1-E2466965BE60}"
+      DTS:ObjectName="ADLA Connection Manager">
+      <DTS:ObjectData>
+        <AzureDataLakeAnalyticsConnectionManager
+          ConnectionString="AdlaAccountName=mydla;AdlaAuthType=AzureADServiceIdentity;AdlaUserName=23ad424c-c014-47ed-a5f8-f8da73dd0412;AdlaTenantId=309c7359-0357-4b36-969f-6885cb2f5895;">
+          <adlaPassWordElement
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACqwP126qP4mdUMlj864Ab3Ci3ki9n53RaF1fym9fQ9jAAAAAAOgAAAAAIAACAAAAA0yz6sCO0OLxf9BXZDHd+oGgapt+rGfRf0CBFofFhhYlAAAAD+L7FGWTnHRSaGZAFXn73qPIwLGYAl5/3IaIaJ5cuDPLybFe6yCykcT9XkBXklg+1S0JXR+iTDi7YG09Cen30lXMlAl5jHtuDIWeBuDTZhJ0AAAACzfEj/2J/4T9DH+UmM52BrRFpUdKD8bKF7zuK6tU04sY6jWjsC8VDpYwhNPsdNvXlS1jeawVHDKcgGh6URfrJj</adlaPassWordElement>
+        </AzureDataLakeAnalyticsConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Azure Data Lake Analytics Task"
+      DTS:CreationName="AdlaTask"
+      DTS:Description="Azure Data Lake Analytics Task"
+      DTS:DTSID="{DDCBF4C9-D3A9-462B-A36E-97B575623038}"
+      DTS:ExecutableType="AdlaTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Azure Data Lake Analytics Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <AdlaTask
+          SourceType="DirectInput"
+          USQLStatement="@employees=EXTRACT Empno int,Ename string,&#xA;Salary int,&#xA;DeptNo int&#xA;FROM &quot;/employees/Employees.csv&quot;&#xA;USING Extractors.Csv(skipFirstNRows:1);&#xA;&#xA;@deptwisesalaries=SELECT DeptNo,&#xA;SUM(Salary) AS DeptWiseTotalSalary&#xA;FROM @employees&#xA;GROUP BY DeptNo;&#xA;&#xA;OUTPUT @deptwisesalaries TO &quot;/output/NewDeptWiseSalaries.csv&quot;&#xA;ORDER BY DeptNo ASC&#xA;USING Outputters.Csv(outputHeader:true);&#xA;&#xA;&#xA;"
+          DataLakeAnalyticsConnectionId="{14EACF20-A67D-4B64-BDE1-E2466965BE60}"
+          JobName="MyNewADLAJob"
+          AnalyticsUnits="1"
+          Priority="1000"
+          RuntimeVersion="default"
+          Synchronous="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="226,42"
+          Id="Package\Azure Data Lake Analytics Task"
+          TopLeft="89,135" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

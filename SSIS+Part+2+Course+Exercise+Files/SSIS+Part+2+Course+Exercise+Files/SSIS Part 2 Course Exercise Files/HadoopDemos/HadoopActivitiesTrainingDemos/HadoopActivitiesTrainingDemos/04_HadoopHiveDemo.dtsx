@@ -1,0 +1,241 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/21/2019 1:13:01 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ITACADEMY"
+  DTS:CreatorName="ITACADEMY\KameswaraSarma"
+  DTS:DTSID="{B4B1C5D9-7DFA-4365-B80A-C5BD372E3582}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="04_HadoopHiveDemo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{D35EF60C-B845-421B-B4D1-1B04550B011B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Departments.csv]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{76F2AACE-8F23-40DB-99A7-153BED9F5A6D}"
+      DTS:ObjectName="Departments.csv">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\KameswaraSarma\Desktop\Files\Departments.csv" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Hadoop Connection Manager]"
+      DTS:CreationName="Hadoop"
+      DTS:DTSID="{D171D0EB-39C8-438D-9254-E73AD904BF4E}"
+      DTS:ObjectName="Hadoop Connection Manager">
+      <DTS:ObjectData>
+        <HadoopConnectionManager
+          ConnectionString="WebHdfsHost=192.168.160.128;WebHdfsPort=50070;WebHdfsUserName=maria_dev;WebHCatHost=192.168.160.128;WebHCatPort=50111;WebHCatUser=maria_dev;EnableWebHdfs=True;EnableWebHCat=True;WebHdfsAuthType=Basic;WebHdfsDomain=;WebHCatAuthType=Basic;WebHCatDomain=;WebHdfsIsHttps=False;WebHCatIsHttps=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Departments Table"
+      DTS:CreationName="HadoopHiveTask"
+      DTS:Description="Hadoop Hive Task"
+      DTS:DTSID="{0786D23C-F66C-4E19-A798-A7CD5826BA6E}"
+      DTS:ExecutableType="HadoopHiveTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Departments Table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HadoopHiveTask
+          HadoopConnectionId="{D171D0EB-39C8-438D-9254-E73AD904BF4E}"
+          SourceType="DirectInput"
+          InlineScript="CREATE EXTERNAL TABLE IF NOT EXISTS Departments(&#xA;        DeptNo INT,&#xA;        DeptName STRING, &#xA;        Location STRING      &#xA;       )&#xA;    COMMENT 'All Departments'&#xA;    ROW FORMAT DELIMITED&#xA;    FIELDS TERMINATED BY ','&#xA;    LINES TERMINATED BY '\n'&#xA;    STORED AS TEXTFILE&#xA;    location '/demo';"
+          TimeoutInMinutes="1440" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Drop Departments Table"
+      DTS:CreationName="HadoopHiveTask"
+      DTS:Description="Hadoop Hive Task"
+      DTS:DTSID="{C88D626F-D9CA-4BF1-8FC0-8BA14CA446F9}"
+      DTS:ExecutableType="HadoopHiveTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop Departments Table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HadoopHiveTask
+          HadoopConnectionId="{D171D0EB-39C8-438D-9254-E73AD904BF4E}"
+          SourceType="DirectInput"
+          InlineScript="DROP TABLE IF EXISTS Departments"
+          TimeoutInMinutes="1440" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Hadoop File System Task"
+      DTS:CreationName="HadoopFileSystemTask"
+      DTS:Description="Hadoop File System Task"
+      DTS:DTSID="{234B2887-C879-47B9-A8CB-FB3D63FC7B80}"
+      DTS:ExecutableType="HadoopFileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Hadoop File System Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HadoopFileSystemTask
+          LocalFilePathId="{76F2AACE-8F23-40DB-99A7-153BED9F5A6D}"
+          HadoopConnectionId="{D171D0EB-39C8-438D-9254-E73AD904BF4E}"
+          Operation="CopyToHDFS"
+          IsOverwrite="True"
+          HadoopFilePath="/demo/Departments.csv"
+          HadoopFileType="File" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Data Into Departments"
+      DTS:CreationName="HadoopHiveTask"
+      DTS:Description="Hadoop Hive Task"
+      DTS:DTSID="{EF69A918-501E-4DBE-8E14-882B271C0D30}"
+      DTS:ExecutableType="HadoopHiveTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Data Into Departments"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HadoopHiveTask
+          HadoopConnectionId="{D171D0EB-39C8-438D-9254-E73AD904BF4E}"
+          SourceType="DirectInput"
+          InlineScript="LOAD DATA INPATH 'hdfs://192.168.160.128:8020/demo/Departments.csv' &#xA;INTO TABLE Departments;"
+          TimeoutInMinutes="1440" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{FBB1BFBA-3397-4356-B2EB-23F030B233C4}"
+      DTS:From="Package\Drop Departments Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Create Departments Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{6069EF5C-8FE5-4103-A887-896C7E24F4DA}"
+      DTS:From="Package\Create Departments Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Data Into Departments" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{D3E641B3-10EF-454F-B05A-C87B2DC9D266}"
+      DTS:From="Package\Hadoop File System Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Drop Departments Table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="192,42"
+          Id="Package\Create Departments Table"
+          TopLeft="154,171" />
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Drop Departments Table"
+          TopLeft="153,103" />
+        <NodeLayout
+          Size="215,42"
+          Id="Package\Load Data Into Departments"
+          TopLeft="149,247" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="250.25,145">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26"
+              Start="0,0"
+              End="0,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="253.25,213">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34"
+              Start="0,0"
+              End="0,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="197,42"
+          Id="Package\Hadoop File System Task"
+          TopLeft="145,33" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="247,75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,418 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/9/2019 3:14:14 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MYLENOVOI7"
+  DTS:CreatorName="MYLENOVOI7\KameswaraSarma"
+  DTS:DTSID="{69BAA2D2-A310-4235-B357-1DAE47DA9B5D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="03_AzureBlobSourceDemo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{39DD2C5A-FE70-454D-8C3A-E8D043C1906E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{754BC32C-938F-430F-A236-B700D00D7D98}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="16393"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Azure\test66.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DEPTNO"
+              DTS:DTSID="{38794050-3382-49E0-86A2-90410E846C6A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DNAME"
+              DTS:DTSID="{99B9B46C-3CDA-4E75-89E5-E67BDA19D19F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LOC"
+              DTS:DTSID="{39217DD9-9BE5-4FA3-8DDE-43AD59E78D2A}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+      DTS:CreationName="AzureStorage"
+      DTS:DTSID="{C532580A-5BA2-4CE7-A054-02F427FD4BD9}"
+      DTS:ObjectName="SSIS Connection Manager for Azure Storage">
+      <DTS:ObjectData>
+        <AzureStorageConnectionManager
+          ConnectionString="AccountName=ssisstorageaccountdemo;DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;">
+          <AccountKey
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACr44oxAsSXB6uWBPyhI88dIJrQhM+JNgXtGLewYjJmpAAAAAAOgAAAAAIAACAAAACFj+5MvCdD1o3yACzZ56EPytlUrE6z+J0c73MQTrO4hcAAAACMTi7hdgkwveAYWm8FjijXeLG+q5EEsLt9WWmRxqv4xHIVY9NEaojKL9rrB4r5SmmCNNh553RsSzHApHBAKw4iyayXQJhtHRKuDoDd2mkwWprF1t3K4yWLP2evQQ8nA22xOb5wkNwUFGqc+EL48kB9cVSMiB5Uih6r9c5jNWxbzBriEWA6IXacVAmEEeRlxSvql2oiDPK/ZE8oxAj8MFLAd9OIzS/nxdU/4y3aaqYr5ZSBMiQpNG0gsXA59D18rxBAAAAAJpoHLZjkxGMLfR4hf+M8AyguDavtbx3lVVUWCPA9jNiaZ86tgQ85m/2uXPKjpFcfrbKfWVh+G/ITTQcHSTBJBg</AccountKey>
+        </AzureStorageConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{32E486DA-05C5-45A8-801F-B9AE6B9EEA88}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Azure Blob Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="© Microsoft Corporation; All Rights Reserved;"
+              description="Extracts data from a blob in Azure Storage. The supported file formats are: Text and Avro."
+              name="Azure Blob Source"
+              usesDispositions="true"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of blob container"
+                  expressionType="Notify"
+                  name="Blob Container">testblobcontainer</property>
+                <property
+                  dataType="System.String"
+                  description="The full name of blob"
+                  expressionType="Notify"
+                  name="Blob Name">test6.csv</property>
+                <property
+                  dataType="System.Int32"
+                  description="The format of blob file"
+                  name="Blob Format"
+                  typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzBlobFormatEnumStringConverter">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Compress File"
+                  name="Compress File">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The compression type"
+                  name="Compression Type"
+                  typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzCompressionTypeEnumStringConverter">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The compression level"
+                  name="Compression Level"
+                  typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzCompressionLevelEnumStringConverter">0</property>
+                <property
+                  dataType="System.String"
+                  description="The character used to delimit columns in text file"
+                  name="Column Delimiter">,</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Column names in the first data row"
+                  name="First Row as Column Names">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">AzBlobSrc</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Azure Blob Source.Connections[Azure Storage]"
+                  connectionManagerID="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+                  connectionManagerRefId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+                  description="Connection Manager for Azure Storage"
+                  name="Azure Storage" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Azure Blob Source.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].Columns[DEPTNO]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].ExternalColumns[DEPTNO]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].Columns[DEPTNO]"
+                      name="DEPTNO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].Columns[DNAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].ExternalColumns[DNAME]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].Columns[DNAME]"
+                      name="DNAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].Columns[LOC]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].ExternalColumns[LOC]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].Columns[LOC]"
+                      name="LOC"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].ExternalColumns[DEPTNO]"
+                      dataType="wstr"
+                      length="255"
+                      name="DEPTNO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].ExternalColumns[DNAME]"
+                      dataType="wstr"
+                      length="255"
+                      name="DNAME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].ExternalColumns[LOC]"
+                      dataType="wstr"
+                      length="255"
+                      name="LOC" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Azure Blob Source.Outputs[Error output]"
+                  isErrorOut="true"
+                  name="Error output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Azure Blob Source.Outputs[Error output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Azure Blob Source.Outputs[Error output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Azure Blob Source.Outputs[Error output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Azure Blob Source.Outputs[Error output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Azure Blob Source.Outputs[Error output].Columns[DEPTNO]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Azure Blob Source.Outputs[Error output].Columns[DEPTNO]"
+                      name="DEPTNO" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Azure Blob Source.Outputs[Error output].Columns[DNAME]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Azure Blob Source.Outputs[Error output].Columns[DNAME]"
+                      name="DNAME" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Azure Blob Source.Outputs[Error output].Columns[LOC]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Azure Blob Source.Outputs[Error output].Columns[LOC]"
+                      name="LOC" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Destination"
+              localeId="16393"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[DEPTNO]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DEPTNO"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DEPTNO]"
+                      lineageId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].Columns[DEPTNO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[DNAME]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DNAME"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DNAME]"
+                      lineageId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].Columns[DNAME]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[LOC]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="LOC"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LOC]"
+                      lineageId="Package\Data Flow Task\Azure Blob Source.Outputs[Output].Columns[LOC]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DEPTNO]"
+                      dataType="wstr"
+                      length="255"
+                      name="DEPTNO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DNAME]"
+                      dataType="wstr"
+                      length="255"
+                      name="DNAME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LOC]"
+                      dataType="wstr"
+                      length="255"
+                      name="LOC" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Output]"
+              endId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="Output"
+              startId="Package\Data Flow Task\Azure Blob Source.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="164,121" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Data Flow Task\Azure Blob Source"
+          TopLeft="185,87" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Data Flow Task\Flat File Destination"
+          TopLeft="196,204" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Output]"
+          TopLeft="267.5,129">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14.5,75"
+              Start="0,0"
+              End="14.5,67.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.5"
+                    Point2="0,37.5"
+                    Point3="4,37.5" />
+                  <mssgle:LineSegment
+                    End="10.5,37.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.5,37.5"
+                    Point2="14.5,37.5"
+                    Point3="14.5,41.5" />
+                  <mssgle:LineSegment
+                    End="14.5,67.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Azure Blob Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

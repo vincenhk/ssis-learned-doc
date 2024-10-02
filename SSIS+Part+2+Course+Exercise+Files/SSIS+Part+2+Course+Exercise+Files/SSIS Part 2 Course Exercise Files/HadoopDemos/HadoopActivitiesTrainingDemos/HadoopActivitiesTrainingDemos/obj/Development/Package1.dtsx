@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/21/2019 1:13:01 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ITACADEMY"
+  DTS:CreatorName="ITACADEMY\KameswaraSarma"
+  DTS:DTSID="{5DD3F235-EBED-4AFB-AC36-FEDDC2A9127A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{7A109795-33A7-4C5D-B051-7709F6ADA4CF}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Hadoop Connection Manager]"
+      DTS:CreationName="Hadoop"
+      DTS:DTSID="{D171D0EB-39C8-438D-9254-E73AD904BF4E}"
+      DTS:ObjectName="Hadoop Connection Manager">
+      <DTS:ObjectData>
+        <HadoopConnectionManager
+          ConnectionString="WebHdfsHost=192.168.160.128;WebHdfsPort=50070;WebHdfsUserName=maria_dev;WebHCatHost=192.168.160.128;WebHCatPort=50111;WebHCatUser=maria_dev;EnableWebHdfs=True;EnableWebHCat=True;WebHdfsAuthType=Basic;WebHdfsDomain=;WebHCatAuthType=Basic;WebHCatDomain=;WebHdfsIsHttps=False;WebHCatIsHttps=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Employees Table"
+      DTS:CreationName="HadoopHiveTask"
+      DTS:Description="Hadoop Hive Task"
+      DTS:DTSID="{0786D23C-F66C-4E19-A798-A7CD5826BA6E}"
+      DTS:ExecutableType="HadoopHiveTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Employees Table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HadoopHiveTask
+          HadoopConnectionId="{D171D0EB-39C8-438D-9254-E73AD904BF4E}"
+          SourceType="DirectInput"
+          InlineScript="CREATE EXTERNAL TABLE IF NOT EXISTS AllEmployees(&#xA;        Ecode INT,&#xA;        Ename STRING, &#xA;        Salary INT      &#xA;       )&#xA;    COMMENT 'All Employees'&#xA;    ROW FORMAT DELIMITED&#xA;    FIELDS TERMINATED BY ','&#xA;    LINES TERMINATED BY '\n'&#xA;    STORED AS TEXTFILE&#xA;    location '/demo';"
+          TimeoutInMinutes="1440" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Drop Employees Table"
+      DTS:CreationName="HadoopHiveTask"
+      DTS:Description="Hadoop Hive Task"
+      DTS:DTSID="{C88D626F-D9CA-4BF1-8FC0-8BA14CA446F9}"
+      DTS:ExecutableType="HadoopHiveTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop Employees Table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HadoopHiveTask
+          HadoopConnectionId="{D171D0EB-39C8-438D-9254-E73AD904BF4E}"
+          SourceType="DirectInput"
+          InlineScript="DROP TABLE IF EXISTS AllEmployees"
+          TimeoutInMinutes="1440" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Data Into AllEmployees"
+      DTS:CreationName="HadoopHiveTask"
+      DTS:Description="Hadoop Hive Task"
+      DTS:DTSID="{EF69A918-501E-4DBE-8E14-882B271C0D30}"
+      DTS:ExecutableType="HadoopHiveTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Data Into AllEmployees"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HadoopHiveTask
+          HadoopConnectionId="{D171D0EB-39C8-438D-9254-E73AD904BF4E}"
+          SourceType="DirectInput"
+          InlineScript="LOAD DATA INPATH 'hdfs://192.168.160.128:8080/demo/Employee.csv' &#xA;INTO TABLE AllEmployees;"
+          TimeoutInMinutes="1440" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{FBB1BFBA-3397-4356-B2EB-23F030B233C4}"
+      DTS:From="Package\Drop Employees Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Create Employees Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{6069EF5C-8FE5-4103-A887-896C7E24F4DA}"
+      DTS:From="Package\Create Employees Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Data Into AllEmployees" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Drop Employees Table"
+          TopLeft="111,32" />
+        <NodeLayout
+          Size="192,42"
+          Id="Package\Create Employees Table"
+          TopLeft="117,122" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="203.5,74">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9.5,48"
+              Start="0,0"
+              End="9.5,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20"
+                    Point2="0,24"
+                    Point3="4,24" />
+                  <mssgle:LineSegment
+                    End="5.5,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.5,24"
+                    Point2="9.5,24"
+                    Point3="9.5,28" />
+                  <mssgle:LineSegment
+                    End="9.5,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="215,42"
+          Id="Package\Load Data Into AllEmployees"
+          TopLeft="149,247" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="213,164">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43.5,83"
+              Start="0,0"
+              End="43.5,75.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.5"
+                    Point2="0,41.5"
+                    Point3="4,41.5" />
+                  <mssgle:LineSegment
+                    End="39.5,41.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="39.5,41.5"
+                    Point2="43.5,41.5"
+                    Point3="43.5,45.5" />
+                  <mssgle:LineSegment
+                    End="43.5,75.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

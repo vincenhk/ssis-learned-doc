@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/10/2019 12:25:27 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MYLENOVOI7"
+  DTS:CreatorName="MYLENOVOI7\KameswaraSarma"
+  DTS:DTSID="{B40A00A6-25E2-4B15-85D6-A09CADFB9ADF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="09_FlexibleFileTaskDownloadDemo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{22EEF086-4E08-4D26-B6D7-A1FDD9C6DCEE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+      DTS:CreationName="AzureStorage"
+      DTS:DTSID="{6842D634-77CA-47F4-8AD1-6ACF5AC0B860}"
+      DTS:ObjectName="SSIS Connection Manager for Azure Storage">
+      <DTS:ObjectData>
+        <AzureStorageConnectionManager
+          ConnectionString="AccountName=ssisstorageaccountdemo;DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;">
+          <AccountKey
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACQbUjhJ5+oLQS/ZeixBfV8tzNfLt7gM0/TPSZwBlsFUAAAAAAOgAAAAAIAACAAAAA4qkGfJO39fHoQE+3fGVAyviqAGg7+QdVusOPvj5jDNcAAAABPjY/tZPFbcM0sdoMfBNZUWuNMTf2DgyVAewF7w1367+qmZBLv5bBjak6JeVTqNPs3DrpWvIdbbEdToaSIU/Px7tFKq67swNvNDeUb0fIH0jYeq0RKYMYVb3VZisF8fNarbaI7VvxfMky1aHaMoorKYDeBOksEBZCdZ10JoA4/cbza6zZTtR2388mxqB+UNnlKX2B+xozTMOmW1XBxFmTxLtRcipdProWfksLEKHOIiFMS2XC1yOnGkhO355ku1aBAAAAAWKMl75BvvWTVC8nKiRS3tk8OYp3YLEAJdDpplWNuXDmEzXWxqFkRi6Z+70/R92TNhOZaCq+E/A8us1F2L4sELA</AccountKey>
+        </AzureStorageConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Flexible File Task"
+      DTS:CreationName="ExtensibleFileTask"
+      DTS:Description="Flexible File Task"
+      DTS:DTSID="{D254374C-2458-4A66-8499-71CF6AF58354}"
+      DTS:ExecutableType="ExtensibleFileTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Flexible File Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExtensibleFileTask
+          Operation="Copy"
+          SourceConnectionType="AzureStorage"
+          SourceConnectionId="{6842D634-77CA-47F4-8AD1-6ACF5AC0B860}"
+          SourceFolderPath="testblobcontainer"
+          SearchRecursively="False"
+          DestinationConnectionType="LocalFileSystem"
+          DestinationFolderPath="c:\azure\outputs" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Flexible File Task"
+          TopLeft="155,126" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

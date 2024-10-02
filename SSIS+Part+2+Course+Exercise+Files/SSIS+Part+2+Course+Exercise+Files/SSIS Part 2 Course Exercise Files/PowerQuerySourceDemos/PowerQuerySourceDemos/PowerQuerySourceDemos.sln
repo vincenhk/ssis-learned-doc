@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "PowerQuerySourceDemos", "PowerQuerySourceDemos\PowerQuerySourceDemos.dtproj", "{65079990-AF96-4E66-A78D-15D7F71B9A19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65079990-AF96-4E66-A78D-15D7F71B9A19}.Development|Default.ActiveCfg = Development
+		{65079990-AF96-4E66-A78D-15D7F71B9A19}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B9D419E-429C-480D-B3C7-A16AC210487C}
+	EndGlobalSection
+EndGlobal

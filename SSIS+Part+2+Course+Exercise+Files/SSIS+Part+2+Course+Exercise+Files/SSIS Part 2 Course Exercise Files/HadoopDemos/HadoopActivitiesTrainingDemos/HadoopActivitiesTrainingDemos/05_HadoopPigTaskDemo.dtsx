@@ -1,0 +1,125 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/21/2019 4:57:23 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ITACADEMY"
+  DTS:CreatorName="ITACADEMY\KameswaraSarma"
+  DTS:DTSID="{D528F316-B516-4A70-AC51-8588B3317347}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="05_HadoopPigTaskDemo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{0D40D759-8852-4D32-9C07-4E6B0AC420FB}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Hadoop Connection Manager]"
+      DTS:CreationName="Hadoop"
+      DTS:DTSID="{E3BA82B5-2718-4F58-87A1-DE55F193206A}"
+      DTS:ObjectName="Hadoop Connection Manager">
+      <DTS:ObjectData>
+        <HadoopConnectionManager
+          ConnectionString="WebHdfsHost=192.168.160.128;WebHdfsPort=50070;WebHdfsUserName=maria_dev;WebHCatHost=192.168.160.128;WebHCatPort=50111;WebHCatUser=maria_dev;EnableWebHdfs=True;EnableWebHCat=True;WebHdfsAuthType=Basic;WebHdfsDomain=;WebHCatAuthType=Basic;WebHCatDomain=;WebHdfsIsHttps=False;WebHCatIsHttps=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Hadoop Pig Task"
+      DTS:CreationName="HadoopPigTask"
+      DTS:Description="Hadoop Pig Task"
+      DTS:DTSID="{34347373-9E72-493B-9990-0BA110ABDBC2}"
+      DTS:ExecutableType="HadoopPigTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Hadoop Pig Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HadoopPigTask
+          HadoopConnectionId="{E3BA82B5-2718-4F58-87A1-DE55F193206A}"
+          SourceType="DirectInput"
+          InlineScript="rmf /Samples/demos"
+          TimeoutInMinutes="1440" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Hadoop Pig Task 1"
+      DTS:CreationName="HadoopPigTask"
+      DTS:Description="Hadoop Pig Task"
+      DTS:DTSID="{B7E75512-618D-489A-B321-BE3B75E2761D}"
+      DTS:ExecutableType="HadoopPigTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Hadoop Pig Task 1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HadoopPigTask
+          HadoopConnectionId="{E3BA82B5-2718-4F58-87A1-DE55F193206A}"
+          SourceType="DirectInput"
+          InlineScript="depts = LOAD '/demo/Departments.csv' USING PigStorage(',')&#xA;AS (DeptNo:int,DeptName:chararray, Location:chararray);&#xA;departments = FOREACH depts GENERATE DeptNo,DeptName,Location;&#xA;STORE departments INTO '/Samples/demos/NewDepartments.csv' USING PigStorage(',');&#xA;"
+          TimeoutInMinutes="1440" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{54880623-3A09-4645-A1F6-2F1FA91801FD}"
+      DTS:From="Package\Hadoop Pig Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Hadoop Pig Task 1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Hadoop Pig Task"
+          TopLeft="193,115" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Hadoop Pig Task 1"
+          TopLeft="196,204" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="275.75,157">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47"
+              Start="0,0"
+              End="0,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

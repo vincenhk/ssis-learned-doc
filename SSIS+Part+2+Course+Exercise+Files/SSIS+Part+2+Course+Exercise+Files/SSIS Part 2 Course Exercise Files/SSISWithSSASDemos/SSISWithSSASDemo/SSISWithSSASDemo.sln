@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSISWithSSASDemo", "SSISWithSSASDemo\SSISWithSSASDemo.dtproj", "{0DF9B32C-EAA6-4B70-BF22-EDC6CB83D0A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0DF9B32C-EAA6-4B70-BF22-EDC6CB83D0A6}.Development|Default.ActiveCfg = Development
+		{0DF9B32C-EAA6-4B70-BF22-EDC6CB83D0A6}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DABC053F-0872-455F-A453-DCA252477D4A}
+	EndGlobalSection
+EndGlobal

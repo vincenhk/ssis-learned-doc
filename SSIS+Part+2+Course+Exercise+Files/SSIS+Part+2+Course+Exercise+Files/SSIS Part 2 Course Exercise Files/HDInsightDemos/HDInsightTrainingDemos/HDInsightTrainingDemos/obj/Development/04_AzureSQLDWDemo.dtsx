@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/13/2019 3:51:58 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MYLENOVOI7"
+  DTS:CreatorName="MYLENOVOI7\KameswaraSarma"
+  DTS:DTSID="{1AD46EBF-046A-4CFC-AD64-4686852E3F2F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="04_AzureSQLDWDemo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{169FBB29-FB65-4C6D-844A-E33342E2AA1A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[myazurenewsqlserver.database.windows.net.mysqldw.sqladmin]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{C1694EF2-18D0-4653-A72E-49222FD288E3}"
+      DTS:ObjectName="myazurenewsqlserver.database.windows.net.mysqldw.sqladmin">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=tcp:mynewazuresqlserverdemo.database.windows.net,1433;User ID=sqladmin;Initial Catalog=mynewsqldw;Persist Security Info=True;Application Name=SSIS-04_AzureSQLDWDemo-{C1694EF2-18D0-4653-A72E-49222FD288E3}myazurenewsqlserver.database.windows.net.mysqldw.sqladmin;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABQzwwr5aPmxP7UrSFwjNRYQXQYz6R6E2Zi+UP7EcWljwAAAAAOgAAAAAIAACAAAABtKEoW+jvdFABsJgU7MusubpaW55/ZHJnu0nZZ+ycndSAAAADk0xYecwq6j+1M/Ll5VawCW6v4qcdm2UA2rDQuz3q7r0AAAAAE7gFaI0ZPx1DMS5uk4Ay3ALdV5TtZLJktZE9MelI14lDIC3dBNYoXyau/oncz9cD+dMxt7eyoYZyFhdjGeHP/</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+      DTS:CreationName="AzureStorage"
+      DTS:DTSID="{4D1D465F-0D09-4958-BEBA-47F04B03CB63}"
+      DTS:ObjectName="SSIS Connection Manager for Azure Storage">
+      <DTS:ObjectData>
+        <AzureStorageConnectionManager
+          ConnectionString="AccountName=ssisstorageaccountdemo;DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;">
+          <AccountKey
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACa5WULr88cRByDHAA3/+U+PPPBcZxbc3623tTuVU5qDwAAAAAOgAAAAAIAACAAAABej95swB30vnlcGwoGCx/H6vUUy58S2AhqvLi/IhtoQMAAAACPuvCEH7x5ySEITe0ZkAcLh1GxjhGZ6Rq4nR71GWQJVcing2nUeSL9NBgjeXLemrrsF7sdIm2B2N/wO8eV/EbpS68y518RF1SnhLZWDBNP6MJHrx8fzkSPXBYAIQTUrfymB1n45NV6Qs141Qrzv8VKN1s5nYDSOtKGMDPJ82vlD7aGoL9IXXe6yGKaTDY4swZrzigqR8u95uz0dl7DE/dGBBw4G/T3P9m9mNf+yKsVyZyPhy0iFQAGQ12wev8O+MRAAAAAoyax/zjQtyG1t3Z+CKm8w0CCWRiwfe2e72KILlShXqXa3Y5Q6gfxHkoc4bL/8WeUuyMW4WCmYTtVUvwXEtSh3w</AccountKey>
+        </AzureStorageConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Azure SQL DW Upload Task"
+      DTS:CreationName="DwUploadTask"
+      DTS:Description="Azure SQL DW Upload Task"
+      DTS:DTSID="{ABA19FA8-917C-4000-91F6-95FCDB83C584}"
+      DTS:ExecutableType="DwUploadTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Azure SQL DW Upload Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <CopyToDwTask
+          SourceType="FileSystem"
+          LocalDirectory="C:\Azure"
+          Recursively="False"
+          FileName="Departments.csv"
+          RowDelimiterType="CRLF"
+          ColumnDelimiter=","
+          IsFirstRowHeader="True"
+          BlobContainer="testblobcontainer"
+          BlobDirectory="mydepartmentsblobdirectory/"
+          RetainFiles="False"
+          CompressionType="None"
+          CompressionLevel="Optimal"
+          BlobConnectionId="{4D1D465F-0D09-4958-BEBA-47F04B03CB63}"
+          DwConnectionId="{C1694EF2-18D0-4653-A72E-49222FD288E3}"
+          TableName="&quot;mysqldwDepartmentTable&quot;"
+          TableDistribution="ROUND_ROBIN"
+          OperationType="Create"
+          SourceColumnNames="DeptNo&#xA;Dname&#xA;Location&#xA;"
+          SourceColumnTypes="VarChar&#xA;VarChar&#xA;VarChar&#xA;"
+          SourceColumnWidths="30&#xA;30&#xA;30&#xA;"
+          SourceColumnPrecisions="0&#xA;0&#xA;0&#xA;"
+          SourceColumnScales="0&#xA;0&#xA;0&#xA;"
+          DestinationColumnNames="DeptNo&#xA;Dname&#xA;Location&#xA;"
+          DestinationColumnTypes="VarChar&#xA;VarChar&#xA;VarChar&#xA;"
+          DestinationColumnWidths="30&#xA;30&#xA;30&#xA;"
+          DestinationColumnPrecisions="0&#xA;0&#xA;0&#xA;"
+          DestinationColumnScales="0&#xA;0&#xA;0&#xA;"
+          MappedDestinationColumnIndex="0&#xA;1&#xA;2&#xA;"
+          SQL="CREATE DATABASE SCOPED CREDENTIAL &quot;&lt;credential_name&gt;&quot;&#xA;WITH IDENTITY = '&lt;blob_account_name&gt;',&#xA;SECRET = '&lt;blob_account_key&gt;';&#xA;CREATE EXTERNAL DATA SOURCE &quot;&lt;external_data_source_name&gt;&quot;&#xA;WITH (&#xA;    TYPE = HADOOP,&#xA;    LOCATION = 'wasbs://&lt;blob_container&gt;@&lt;blob_account_name&gt;.blob.&lt;blob_endpoint_suffix&gt;',&#xA;    CREDENTIAL = &quot;&lt;credential_name&gt;&quot;&#xA;);&#xA;CREATE EXTERNAL FILE FORMAT &quot;&lt;external_file_format_name&gt;&quot;&#xA;WITH (&#xA;    FORMAT_TYPE = DELIMITEDTEXT,&#xA;    FORMAT_OPTIONS (&#xA;        FIELD_TERMINATOR = '&lt;column_delimiter&gt;'&#xA;    )&#xA;);&#xA;CREATE EXTERNAL TABLE &quot;&lt;external_table_name&gt;&quot; (&#xA;    &quot;DeptNo&quot; varchar(30),&#xA;    &quot;Dname&quot; varchar(30),&#xA;    &quot;Location&quot; varchar(30)&#xA;) WITH (&#xA;    LOCATION = '&lt;blob_directory&gt;',&#xA;    DATA_SOURCE = &quot;&lt;external_data_source_name&gt;&quot;,&#xA;    FILE_FORMAT = &quot;&lt;external_file_format_name&gt;&quot;&#xA;);&#xA;CREATE TABLE &quot;mysqldwDepartmentTable&quot; (&#xA;    &quot;DeptNo&quot;,&#xA;    &quot;Dname&quot;,&#xA;    &quot;Location&quot;&#xA;) WITH (&#xA;    DISTRIBUTION = ROUND_ROBIN&#xA;) AS&#xA;SELECT&#xA;    &quot;DeptNo&quot;,&#xA;    &quot;Dname&quot;,&#xA;    &quot;Location&quot;&#xA;FROM &quot;&lt;external_table_name&gt;&quot;;&#xA;DROP EXTERNAL TABLE &quot;&lt;external_table_name&gt;&quot;;&#xA;DROP EXTERNAL FILE FORMAT &quot;&lt;external_file_format_name&gt;&quot;;&#xA;DROP EXTERNAL DATA SOURCE &quot;&lt;external_data_source_name&gt;&quot;;&#xA;DROP DATABASE SCOPED CREDENTIAL &quot;&lt;credential_name&gt;&quot;;"
+          SQLTimeout="0"
+          UnlockSQL="False" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="208.8,41.6"
+          Id="Package\Azure SQL DW Upload Task"
+          TopLeft="210.285717866859,108.894119174258" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/11/2019 1:46:46 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MYLENOVOI7"
+  DTS:CreatorName="MYLENOVOI7\KameswaraSarma"
+  DTS:DTSID="{471B1F62-6DCD-422E-A5E7-B7111769700C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="03_HDInsightCreateClusterDemo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{C718E78A-0C86-4D5C-BE9E-CDFB9C351617}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Azure Resource Manager Connection Manager]"
+      DTS:CreationName="AzureResourceManager"
+      DTS:DTSID="{B7449C1F-320B-4A58-801D-B8A4193A0E3C}"
+      DTS:ObjectName="Azure Resource Manager Connection Manager">
+      <DTS:ObjectData>
+        <AzureResourceManagerConnectionManager
+          ConnectionString="ApplicationId=23ad424c-c014-47ed-a5f8-f8da73dd0412;TenantId=309c7359-0357-4b36-969f-6885cb2f5895;Environment=AzureCloud;">
+          <ApplicationKey
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABVmkbUGREZh9MU3eNnVGfcC7j8deD89qdKVen7bwi4BAAAAAAOgAAAAAIAACAAAACjdIw/1hBLQJiFld4hAZYL8rua7Epw4rF3keh8WAsTRlAAAAC9TLadd8IwLriRik2kcztBebIRuWS0MB0GaDXduoBwB33FbUizpzWTcIT5sk12HC8s2k51ld+KsRxRa/1bxRgX8bFMUq6Yk9bVQTImRI3tnUAAAACwfBc9jeLCzC9XKTujnizCrOPmlqTKspIYf1BPvX5hlsmMYPettMWpFhlsgSvUZJBmlq1Bi4wiMCT42AOPD5ia</ApplicationKey>
+        </AzureResourceManagerConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+      DTS:CreationName="AzureStorage"
+      DTS:DTSID="{F64A6C08-E270-4F1E-9ED2-795F7BE07753}"
+      DTS:ObjectName="SSIS Connection Manager for Azure Storage">
+      <DTS:ObjectData>
+        <AzureStorageConnectionManager
+          ConnectionString="AccountName=myhdinsightstorage;DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;">
+          <AccountKey
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADwAjlZmPOYY+WRbQs5pobBvXHkBVRan71WCwDrnB3+hgAAAAAOgAAAAAIAACAAAABnOzE/lZEMTmEs/ZDzwOYTcYY3SQEZRObZDb7uY5wUe8AAAAB1w4JI0mkCM+YCFB38eETf7Mcn8f87ObJjtGyBu1EPI2wLBaXooQo01eEa5hFzHUuPvRwTC5mZreuYHhafIOdY6ExcKlooWARE5UMJ0WEBc5ms3YDo5BkHOssoklAM6CNRnvoFC0NWgtAS+6/+HrWkh+IqIdDyb3XphnI5XgNomxxnkU2H76KoI1fqKdfMG8dPzXEdL2fhcofiwDyWgrDVdE3HzmhwTxGcbDg0qwNMvf97ZBrI3JmOYytJZ6zASktAAAAAu82dYB3H6FdfBLUXDP4PgLGhMiI3S9UxbxSRcDqLgD75Mw6Z/8GVWbWHakzu27Q2xGvuEQT1wRtCf12Tx5vdwA</AccountKey>
+        </AzureStorageConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Azure HDInsight Create Cluster Task"
+      DTS:CreationName="CreateHdiClusterTask"
+      DTS:Description="Azure HDInsight Create Cluster Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{3A4A1107-A8DC-46C0-B279-4BE097DBDF4A}"
+      DTS:ExecutableType="CreateHdiClusterTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Azure HDInsight Create Cluster Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <CreateHdiClusterTask
+          AzureResourceManagerConnectionId="{B7449C1F-320B-4A58-801D-B8A4193A0E3C}"
+          AzureStorageConnection="{F64A6C08-E270-4F1E-9ED2-795F7BE07753}"
+          SubscriptionId="19613c48-8b00-4514-b8b7-01d52e80491b"
+          ResourceGroup="myhdinsightresourcegroup"
+          Location="Central US"
+          ClusterName="myhadoopcluster"
+          ClusterSize="1"
+          BlobContainer="myhdinsightcontainerblob"
+          UserName="hdiadmin"
+          SshUserName="hdiadminssh"
+          FailIfExists="False">
+          <Password
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADpNao9bmw94dCb8J8YpHG592mvXb5MViUCV+hc+LZCfAAAAAAOgAAAAAIAACAAAACCyqwItRIHR9k5DwSe9J1bOqyX8l0yr+7PXkFbLTOZeyAAAACN2OE47B5iOnAjlmp5eXrswn34MWXdjvhHD4LAWkXhEEAAAAAcueHLG5HkHRHBj6nklCAP+o4h6NMLAalSD1WXDyOB2tX7A+AF3wa5b8BtWnY6T9d0vMu4ZLByazmsbe3IDEsI</Password>
+          <SshPassword
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACvH0Llf/mwBCNG5Sthzo2Rnui9soN9ka/SBGuBl6eK1QAAAAAOgAAAAAIAACAAAAB0xWCReW3FC17ZstafxaJNjKoj89xRbprQtMJsHtuOtyAAAAAK3L7zJL7Tq+MB6VUYhhkMBRNzf68wZrYYLZ1N4Ryp/0AAAADe6Ig2whqECNzMZRMa+2O5EGUhY77BfkT0/1aoVvUl6y410DKIYEe2pM+iJ3WHtl7GipVPJlf0cA2XhC0nZEoi</SshPassword>
+        </CreateHdiClusterTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Azure HDInsight Delete Cluster Task"
+      DTS:CreationName="DeleteHdiClusterTask"
+      DTS:Description="Azure HDInsight Delete Cluster Task"
+      DTS:DTSID="{90E998F7-5637-4B21-AC43-660BAEDCF706}"
+      DTS:ExecutableType="DeleteHdiClusterTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Azure HDInsight Delete Cluster Task"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DeleteHdiClusterTask
+          AzureResourceManagerConnectionId="{B7449C1F-320B-4A58-801D-B8A4193A0E3C}"
+          SubscriptionId="19613c48-8b00-4514-b8b7-01d52e80491b"
+          ResourceGroup="myhdinsightresourcegroup"
+          ClusterName="myhadoopcluster"
+          FailIfNotExists="False" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="251,42"
+          Id="Package\Azure HDInsight Create Cluster Task"
+          TopLeft="144,67" />
+        <NodeLayout
+          Size="250,42"
+          Id="Package\Azure HDInsight Delete Cluster Task"
+          TopLeft="183,178" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

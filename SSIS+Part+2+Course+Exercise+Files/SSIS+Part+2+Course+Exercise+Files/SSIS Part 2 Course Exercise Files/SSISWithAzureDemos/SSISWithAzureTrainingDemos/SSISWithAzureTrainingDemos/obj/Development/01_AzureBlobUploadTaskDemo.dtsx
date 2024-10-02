@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/9/2019 3:00:19 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MYLENOVOI7"
+  DTS:CreatorName="MYLENOVOI7\KameswaraSarma"
+  DTS:DTSID="{63064A48-26C9-488A-8C40-1EC5906FC375}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="01_AzureBlobUploadTaskDemo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{119F1E1D-72BF-48F1-B8E3-61B7B39E0FCF}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+      DTS:CreationName="AzureStorage"
+      DTS:DTSID="{08636332-789A-450E-878E-E9494EB2D51D}"
+      DTS:ObjectName="SSIS Connection Manager for Azure Storage">
+      <DTS:ObjectData>
+        <AzureStorageConnectionManager
+          ConnectionString="AccountName=ssisstorageaccountdemo;DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;">
+          <AccountKey
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB1Edg1mhqWClUvw2kcS0vUws2nQVE+u6aU2gvmV8cylwAAAAAOgAAAAAIAACAAAAC3AbD2VMfIlFL41WKdEzUHZI34oAK2iqtldtfg5ZGQlsAAAAD4oXKm6RDYdWKgrCO6X1/sc3VtbrPmxVJbApvIzur2Y8O7b1IKGKFzoSrlZq1QNUoRXyj+9zOwhvuOnBx+tWFa+L3TVAKppdVd87MT8LeJZzYxJSxGLC4FyjGyJforwlAM1WW5g7Dcc7DxL6jHFMCaYYfry0vlouX8G+K2DG+0jTkFuel05IIDduE0vOUGp8P+kJSIKEpAJi+kEBJwvjnnPRL3GSrka9e5+uJHnaiBKlBYB6KNSX9i/nNRnM98IaVAAAAAGkWWnRUOFZ5xEGaV2dOrZp2neHJHi5BN/XqG4zVDvf74UoVn/nfiQ1L7TETemiulw1Xx9F8g6om5BC6NWSaioQ</AccountKey>
+        </AzureStorageConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Azure Blob Upload Task"
+      DTS:CreationName="CopyToBlobTask"
+      DTS:Description="Azure Blob Upload Task"
+      DTS:DTSID="{1CBB94E5-63D6-4EA6-BBA8-748D6BAAD6E2}"
+      DTS:ExecutableType="CopyToBlobTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Azure Blob Upload Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <CopyToBlobTask
+          ConnectionId="{08636332-789A-450E-878E-E9494EB2D51D}"
+          BlobContainer="testblobcontainer"
+          LocalDirectory="C:\Azure\Sample"
+          FileNameFilter="test6.csv"
+          TimeRangeFrom="01-01-1900 00:00:00 +05:30"
+          TimeRangeTo="31-12-2200 00:00:00 +05:30"
+          SearchRecursively="0" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Azure Blob Upload Task"
+          TopLeft="136,110" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

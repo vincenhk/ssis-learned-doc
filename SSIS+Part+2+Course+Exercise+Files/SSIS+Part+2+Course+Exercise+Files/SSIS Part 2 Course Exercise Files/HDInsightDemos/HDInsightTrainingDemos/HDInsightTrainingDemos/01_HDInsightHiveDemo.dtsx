@@ -1,0 +1,293 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/10/2019 4:41:12 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MYLENOVOI7"
+  DTS:CreatorName="MYLENOVOI7\KameswaraSarma"
+  DTS:DTSID="{7EB6B27D-5E77-4F1A-83A3-6C4A482517DF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="01_HDInsightHiveDemo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{0161552D-333D-42A5-A5EF-A80960EEA0E1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Azure HDInsight Connection Manager]"
+      DTS:CreationName="AzureHDInsight"
+      DTS:DTSID="{BC592057-BECD-4860-9AD0-78C3EC0A40F7}"
+      DTS:ObjectName="Azure HDInsight Connection Manager">
+      <DTS:ObjectData>
+        <AzureHDInsightConnectionManager
+          ConnectionString="ClusterDnsName=mynewhadoopcluster.azurehdinsight.net;Username=admin;">
+          <Password
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABeu8nhCvX2rJ+Og48S943mGkw9wMpME5ykfSqqG4ukawAAAAAOgAAAAAIAACAAAAAlRm8osJ3GjDALADkheLqQ+yK2W9+wA7CGzvqp1IGaNCAAAAAcetSQ5WFNGHqUbnABs11dKTGj6+zryzokHvUEOeC/BUAAAABcCFoABh0MELblkLYDSgg3M1Q47/2mpVm+xIsuYSwwcACzKrhrJKtVJIG7wceo6jhZUOdxHNstxwHFfD2ZjW5E</Password>
+        </AzureHDInsightConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+      DTS:CreationName="AzureStorage"
+      DTS:DTSID="{6B2BBEE6-F571-4534-A13B-372C868E1031}"
+      DTS:ObjectName="SSIS Connection Manager for Azure Storage">
+      <DTS:ObjectData>
+        <AzureStorageConnectionManager
+          ConnectionString="AccountName=mynewhadoopclhdistorage;DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;">
+          <AccountKey
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAYQQnh1IYzFPBMymQIX6N4iUoCZUmGccou7IyInTAkEAAAAAAOgAAAAAIAACAAAAACX9JVfOFTg/0eUJLA3bZUS0fommFnEXiLLOr440Iue8AAAAC/VYcQN/fmXl17nJY76axhqupbXVTJrkLvzjOd1O8+UPNaoBpu9jq1UXlJb9D3WXNFhU50k6e4qKGDkEmz6SJIhGSqJlTF07lkqBDS6n/GQEH7CzdkaLMl9VNKHyIa6eymNUQqgVv/eA14WXEIgvrSk3vmjD9LEV1rmQf8Qxoz7b9M+3ujOeNmYWabh+SzFdUsvi0xXN2s7QwMuVSMJFQLutfJtBVSHZ9MNC9dgPDIimzoh942RRKvCa70d+/1gAdAAAAAIVssLEkCimuC6N5WLtV2/HA5tuA/XrlciRmACVs8/UX1mgHb7oh9a8lPoFRQlSWtDTK/Es9+jXAaKeobY1Ey3A</AccountKey>
+        </AzureStorageConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Azure Blob Upload Task"
+      DTS:CreationName="CopyToBlobTask"
+      DTS:Description="Azure Blob Upload Task"
+      DTS:DTSID="{82BD936D-6E84-4B4A-979B-396CF956B47F}"
+      DTS:ExecutableType="CopyToBlobTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Azure Blob Upload Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <CopyToBlobTask
+          ConnectionId="{6B2BBEE6-F571-4534-A13B-372C868E1031}"
+          BlobContainer="mynewhadoopcluster-2019-11-10t09-51-57-872z"
+          BlobDirectory="demo/"
+          LocalDirectory="C:\Azure"
+          FileNameFilter="Departments.csv"
+          TimeRangeFrom="01-01-1900 00:00:00 +05:30"
+          TimeRangeTo="31-12-2200 00:00:00 +05:30"
+          SearchRecursively="0" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Departments Table - Hive 2"
+      DTS:CreationName="HiveTask"
+      DTS:Description="Azure HDInsight Hive Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{E7B551E2-C05D-46A5-8A71-4D3654315F26}"
+      DTS:ExecutableType="HiveTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Departments Table - Hive 2"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HiveTask
+          HDInsightConnectionId="{BC592057-BECD-4860-9AD0-78C3EC0A40F7}"
+          AzureStorageConnectionId="{6B2BBEE6-F571-4534-A13B-372C868E1031}"
+          BlobContainer="mynewhadoopcluster-2019-11-10t09-51-57-872z"
+          Script="CREATE EXTERNAL TABLE IF NOT EXISTS Departments(&#xA;        DeptNo INT,&#xA;        DeptName STRING, &#xA;        Location STRING      &#xA;       )&#xA;    COMMENT 'All Departments'&#xA;    ROW FORMAT DELIMITED&#xA;    FIELDS TERMINATED BY ','&#xA;    LINES TERMINATED BY '\n'&#xA;    STORED AS TEXTFILE&#xA;    location '/demo';"
+          ExternalStorageAccountDnsSuffix="core.windows.net" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Drop Table Departments - Hive 1"
+      DTS:CreationName="HiveTask"
+      DTS:Description="Azure HDInsight Hive Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{CF9740EE-C92A-4CFF-BF42-6453CB0E1BB7}"
+      DTS:ExecutableType="HiveTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop Table Departments - Hive 1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HiveTask
+          HDInsightConnectionId="{BC592057-BECD-4860-9AD0-78C3EC0A40F7}"
+          AzureStorageConnectionId="{6B2BBEE6-F571-4534-A13B-372C868E1031}"
+          BlobContainer="mynewhadoopcluster-2019-11-10t09-51-57-872z"
+          Script="DROP TABLE IF EXISTS Departments"
+          ExternalStorageAccountDnsSuffix="core.windows.net" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Data - Hive 3"
+      DTS:CreationName="HiveTask"
+      DTS:Description="Azure HDInsight Hive Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{4B5C0405-38DF-4FE1-8DE2-9DEC1E56DD19}"
+      DTS:ExecutableType="HiveTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Data - Hive 3"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HiveTask
+          HDInsightConnectionId="{BC592057-BECD-4860-9AD0-78C3EC0A40F7}"
+          AzureStorageConnectionId="{6B2BBEE6-F571-4534-A13B-372C868E1031}"
+          BlobContainer="mynewhadoopcluster-2019-11-10t09-51-57-872z"
+          Script="LOAD DATA INPATH 'wasb:///demo/Departments.csv' &#xA;INTO TABLE Departments;"
+          ExternalStorageAccountDnsSuffix="core.windows.net" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{098AC42F-7EFF-4213-85C6-80EF89654887}"
+      DTS:From="Package\Azure Blob Upload Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Drop Table Departments - Hive 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{D5651E15-96FD-44B9-A1FB-7E7D233A7E27}"
+      DTS:From="Package\Drop Table Departments - Hive 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Create Departments Table - Hive 2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{7C896325-0637-46A0-9EA4-CE5D92AE10EA}"
+      DTS:From="Package\Create Departments Table - Hive 2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load Data - Hive 3" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Azure Blob Upload Task"
+          TopLeft="200,48" />
+        <NodeLayout
+          Size="243,42"
+          Id="Package\Create Departments Table - Hive 2"
+          TopLeft="220,229" />
+        <NodeLayout
+          Size="235,42"
+          Id="Package\Drop Table Departments - Hive 1"
+          TopLeft="216,145" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Load Data - Hive 3"
+          TopLeft="242,311" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="295,90">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="38.5,55"
+              Start="0,0"
+              End="38.5,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.5"
+                    Point2="0,27.5"
+                    Point3="4,27.5" />
+                  <mssgle:LineSegment
+                    End="34.5,27.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="34.5,27.5"
+                    Point2="38.5,27.5"
+                    Point3="38.5,31.5" />
+                  <mssgle:LineSegment
+                    End="38.5,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="333.5,187">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8,42"
+              Start="0,0"
+              End="8,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17"
+                    Point2="0,21"
+                    Point3="4,21" />
+                  <mssgle:LineSegment
+                    End="4,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,21"
+                    Point2="8,21"
+                    Point3="8,25" />
+                  <mssgle:LineSegment
+                    End="8,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="341.5,271">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-16,40"
+              Start="0,0"
+              End="-16,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16"
+                    Point2="0,20"
+                    Point3="-4,20" />
+                  <mssgle:LineSegment
+                    End="-12,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-12,20"
+                    Point2="-16,20"
+                    Point3="-16,24" />
+                  <mssgle:LineSegment
+                    End="-16,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,155 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/5/2019 4:05:25 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MYLENOVOI7"
+  DTS:CreatorName="MYLENOVOI7\KameswaraSarma"
+  DTS:DTSID="{5E3C9466-D304-4E09-816A-3A14C3E34165}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{F77CD8A7-194D-4A86-A05D-A17D3F3CEA14}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.AnalysisTrainingDemos]"
+      DTS:CreationName="MSOLAP100"
+      DTS:DTSID="{00D8888F-A007-4811-A1CB-04D550A9044E}"
+      DTS:ObjectName="localhost.AnalysisTrainingDemos">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=AnalysisTrainingDemos;Provider=MSOLAP.8;Integrated Security=SSPI;Impersonation Level=Impersonate;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FA2C2C71-D86F-485D-B4D6-DA25F46C4E3B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PYear">
+      <DTS:VariableValue
+        DTS:DataType="8">2013</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Analysis Services Execute DDL Task"
+      DTS:CreationName="Microsoft.ASExecuteDDLTask"
+      DTS:Description="Analysis Services Execute DDL Task"
+      DTS:DTSID="{C9AD5C86-F5F1-4CE7-9D08-6432094D5609}"
+      DTS:ExecutableType="Microsoft.ASExecuteDDLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Analysis Services Execute DDL Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ASDdlData
+          ConnectionName="localhost.AnalysisTrainingDemos"
+          SourceType="DirectInput"
+          Source="{&#xA;  &quot;createOrReplace&quot;: {&#xA;    &quot;object&quot;: {&#xA;      &quot;database&quot;: &quot;AnalysisTrainingDemos&quot;,&#xA;      &quot;table&quot;: &quot;FactInternetSales&quot;,&#xA;      &quot;partition&quot;: &quot;Sales2013&quot;&#xA;    },&#xA;    &quot;partition&quot;: {&#xA;      &quot;name&quot;: &quot;Sales2013&quot;,&#xA;      &quot;dataView&quot;: &quot;full&quot;,&#xA;      &quot;source&quot;: {&#xA;        &quot;query&quot;: &quot;SELECT [dbo].[FactInternetSales].* FROM [dbo].[FactInternetSales]&#xA;&#x9;&#x9;where orderdate between '1/1/2013' and '12/31/2013'&quot;,&#xA;        &quot;dataSource&quot;: &quot;SqlServer localhost AdventureWorksDW2017&quot;&#xA;      }&#xA;    }&#xA;  }&#xA;}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Analysis Services Processing Task"
+      DTS:CreationName="Microsoft.DTSProcessingTask"
+      DTS:Description="Analysis Services Processing Task"
+      DTS:DTSID="{070FA727-B00F-442A-B186-13B36C635262}"
+      DTS:ExecutableType="Microsoft.DTSProcessingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Analysis Services Processing Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="ProcessingCommands">"{
+\"sequence\": {
+\"operations\": [
+{
+\"refresh\": {
+\"type\": \"automatic\",
+\"objects\": [
+{
+\"database\": \"AnalysisTrainingDemos\",
+\"table\": \"FactInternetSales\",
+\"partition\": \"Sales" + @[User::PYear]  + "\"
+}
+]
+}
+}
+]
+}
+}"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <ASProcessingData
+          ConnectionName="localhost.AnalysisTrainingDemos"
+          ProcessingCommands="{&#xA;&quot;sequence&quot;: {&#xA;&quot;operations&quot;: [&#xA;{&#xA;&quot;refresh&quot;: {&#xA;&quot;type&quot;: &quot;automatic&quot;,&#xA;&quot;objects&quot;: [&#xA;{&#xA;&quot;database&quot;: &quot;AnalysisTrainingDemos&quot;,&#xA;&quot;table&quot;: &quot;FactInternetSales&quot;,&#xA;&quot;partition&quot;: &quot;Sales2013&quot;&#xA;}&#xA;]&#xA;}&#xA;}&#xA;]&#xA;}&#xA;}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8E67F914-504F-4459-B311-579F958A6ED7}"
+      DTS:From="Package\Analysis Services Execute DDL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Analysis Services Processing Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="247,42"
+          Id="Package\Analysis Services Execute DDL Task"
+          TopLeft="133,74" />
+        <NodeLayout
+          Size="237,42"
+          Id="Package\Analysis Services Processing Task"
+          TopLeft="139,192" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="257,116">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,76"
+              Start="0,0"
+              End="0,68.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <ConnectionManager
+    design-time-name="Package.ConnectionManagers[localhost.AnalysisTrainingDemos]">
+    <ProjectReferenceName></ProjectReferenceName>
+  </ConnectionManager>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

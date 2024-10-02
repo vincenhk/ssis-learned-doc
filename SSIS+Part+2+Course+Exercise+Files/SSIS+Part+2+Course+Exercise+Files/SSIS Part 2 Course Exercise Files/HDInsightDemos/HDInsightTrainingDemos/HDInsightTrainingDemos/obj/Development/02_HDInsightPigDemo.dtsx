@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/10/2019 6:44:05 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MYLENOVOI7"
+  DTS:CreatorName="MYLENOVOI7\KameswaraSarma"
+  DTS:DTSID="{8F6218BB-88EB-4FFC-B707-45201618C041}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="02_HDInsightPigDemo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{45A72438-42D1-4256-9062-4F508FF7EA94}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Azure HDInsight Connection Manager]"
+      DTS:CreationName="AzureHDInsight"
+      DTS:DTSID="{BC592057-BECD-4860-9AD0-78C3EC0A40F7}"
+      DTS:ObjectName="Azure HDInsight Connection Manager">
+      <DTS:ObjectData>
+        <AzureHDInsightConnectionManager
+          ConnectionString="ClusterDnsName=mynewhadoopcluster.azurehdinsight.net;Username=admin;">
+          <Password
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABPhz2wax35gU0EONoHnQK8FLRaNztK51Yae+AgjCFa+gAAAAAOgAAAAAIAACAAAADGu0hoVacax1T8ynvObDXGbm344pAQlZewmAfWj+PfDCAAAADZkED+txZJkPxn5Yic03lQeeuEnzxlmzDBpgA9jhETvEAAAAAew6RvwNKNszHuwfVEDUxhJNQ0SOkTmdZnCozDnBSbsj0noO6KqU0fJR/xtvQb/fJKmBkHSoeUr4xK6AczV0gY</Password>
+        </AzureHDInsightConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+      DTS:CreationName="AzureStorage"
+      DTS:DTSID="{6B2BBEE6-F571-4534-A13B-372C868E1031}"
+      DTS:ObjectName="SSIS Connection Manager for Azure Storage">
+      <DTS:ObjectData>
+        <AzureStorageConnectionManager
+          ConnectionString="AccountName=mynewhadoopclhdistorage;DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;">
+          <AccountKey
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADP0qolfw2pvCaOVol0qBNz/FWxyX8YF/XmqaBtiiSzWAAAAAAOgAAAAAIAACAAAACBZZLGMGqq7lG9D38PF3WwKf89aH6WCrIpgnms2GqobcAAAAAPn7VWY95juEI6EY5M/UsW2v3UUEZGOZHHCU9LqHegmbtFjwwa5jpmHt8feSe9W4ip1l+9N0YOpCp++RPqL+qPz6O4p03AdRon/OM1fp4F7vlnKoOJOpBDgKPGuyC0lwjQSTE4DVH1592/Nb204Ccm5PXukrCY1WzZ4NKBw9lVbIvttyQg4Jip0rBWXmTcXbIE4jBaTAshbM4lN1wuDUVQyJPec5Wf7bW39MGnf/NhYjDzwsWnCtc2kWoYkUkBkBNAAAAAKg2Vp1TOHG37/qQYZBme4L2mtRxuIm5GTPNGWWkG8RdjOB6ALHG6gWYcHKVtOPdrz/rfshF7fIwbA0rUBsDjjg</AccountKey>
+        </AzureStorageConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Dropping The Folder"
+      DTS:CreationName="PigTask"
+      DTS:Description="Azure HDInsight Pig Task"
+      DTS:DTSID="{2F616BCC-A694-41F5-A2F3-76F4F4CF06B9}"
+      DTS:ExecutableType="PigTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dropping The Folder"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <PigTask
+          HDInsightConnectionId="{BC592057-BECD-4860-9AD0-78C3EC0A40F7}"
+          AzureStorageConnectionId="{6B2BBEE6-F571-4534-A13B-372C868E1031}"
+          BlobContainer="mynewhadoopcluster-2019-11-10t09-51-57-872z"
+          Script="rmf /demo/samples"
+          ExternalStorageAccountDnsSuffix="core.windows.net" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Data Into a Different File"
+      DTS:CreationName="PigTask"
+      DTS:Description="Azure HDInsight Pig Task"
+      DTS:DTSID="{543B37EA-09DC-448A-8F57-BDAE894366F7}"
+      DTS:ExecutableType="PigTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Data Into a Different File"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <PigTask
+          HDInsightConnectionId="{BC592057-BECD-4860-9AD0-78C3EC0A40F7}"
+          AzureStorageConnectionId="{6B2BBEE6-F571-4534-A13B-372C868E1031}"
+          BlobContainer="mynewhadoopcluster-2019-11-10t09-51-57-872z"
+          Script="depts = LOAD 'wasb:///demo/Departments.csv' USING PigStorage(',')&#xA;AS (DeptNo:int,DeptName:chararray, Location:chararray);&#xA;departments = FOREACH depts GENERATE DeptNo,DeptName,Location;&#xA;STORE departments INTO 'wasb:///demo/samples/NewDepartments.csv' USING PigStorage(',');&#xA;"
+          ExternalStorageAccountDnsSuffix="core.windows.net" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{305A18F7-4C37-4062-BDB4-592DEC76419B}"
+      DTS:From="Package\Dropping The Folder"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load Data Into a Different File" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Dropping The Folder"
+          TopLeft="175,116" />
+        <NodeLayout
+          Size="222,42"
+          Id="Package\Load Data Into a Different File"
+          TopLeft="177,220" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="263,158">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="25,62"
+              Start="0,0"
+              End="25,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27"
+                    Point2="0,31"
+                    Point3="4,31" />
+                  <mssgle:LineSegment
+                    End="21,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="21,31"
+                    Point2="25,31"
+                    Point3="25,35" />
+                  <mssgle:LineSegment
+                    End="25,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

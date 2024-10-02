@@ -1,0 +1,449 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/10/2019 12:29:39 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MYLENOVOI7"
+  DTS:CreatorName="MYLENOVOI7\KameswaraSarma"
+  DTS:DTSID="{6EDB447A-D26D-45B3-90B1-977AED8CED1C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="10_FlexibleFileSourceDemo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{6018B5FA-1F03-444B-A6E4-64C1A3DFD9F7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{7A1D7390-3A8A-413D-BF65-B51ED6123C71}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="16393"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Azure\test7.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DEPTNO"
+              DTS:DTSID="{BFFFAE76-5FCD-4ADD-B85A-87E5C956D10A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DNAME"
+              DTS:DTSID="{735716F6-7812-4AE8-81AC-A4E8B4445E43}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LOC"
+              DTS:DTSID="{4C16BFCF-5871-4C25-BB9F-7C5B72808FF2}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+      DTS:CreationName="AzureStorage"
+      DTS:DTSID="{6842D634-77CA-47F4-8AD1-6ACF5AC0B860}"
+      DTS:ObjectName="SSIS Connection Manager for Azure Storage">
+      <DTS:ObjectData>
+        <AzureStorageConnectionManager
+          ConnectionString="AccountName=ssisstorageaccountdemo;DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;">
+          <AccountKey
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAKu2+6BwYwU+DU7jVlek+K+StzrKmlaxvUO1XiAygOTAAAAAAOgAAAAAIAACAAAAA5MeFpDuZcJnr4PtIlkPf6B0LQpBJugK+UMtW6X2vv2MAAAAD4dw9CORYLxWaJVrNiN5K9eqgeSDMicynlpd8oJh5JQg4zVMHtrz3EMwmrnqZYhm7y/14wewGrVL476usOJD396axy5QMrspUgjYD0QOTjLMiVklAbyZyYm0QLxf9FyLVsSBpnIrD8Wwz8o2GWVv1anAN1bDtvlUxy51mB6T9QgETx68s2ySjrhfSPl6PZjst03vOspEMMXu7Czj+ffn2uMO4VQ2Ik2llxBPDktZ6F9OEmS/QPo/1fQ2Gcf2CwuohAAAAAO6OWPYENW7/PP2Gr1lN9b552ASQYEsVNM4HuV2G13CgAwOFdd1rO1Z1h3VBpjW5eCKLj5j4m3hjgfyULshSysg</AccountKey>
+        </AzureStorageConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{449F70DE-D848-40B1-B1F7-2C2A56883FB7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Destination"
+              localeId="16393"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[DEPTNO]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="DEPTNO"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DEPTNO]"
+                      lineageId="Package\Data Flow Task\Flexible File Source.Outputs[Output].Columns[DEPTNO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[DNAME]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="DNAME"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DNAME]"
+                      lineageId="Package\Data Flow Task\Flexible File Source.Outputs[Output].Columns[DNAME]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[LOC]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="LOC"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LOC]"
+                      lineageId="Package\Data Flow Task\Flexible File Source.Outputs[Output].Columns[LOC]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DEPTNO]"
+                      dataType="wstr"
+                      length="100"
+                      name="DEPTNO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DNAME]"
+                      dataType="wstr"
+                      length="100"
+                      name="DNAME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LOC]"
+                      dataType="wstr"
+                      length="100"
+                      name="LOC" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Flexible File Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="MicrosoftContactInfo"
+              description="Extracts data from a file. The supported file formats are: Text, Avro, Orc, Parquet."
+              name="Flexible File Source"
+              usesDispositions="true"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Connection manager type"
+                  name="ConnectionManagerType">0</property>
+                <property
+                  dataType="System.String"
+                  description="Folder Path"
+                  expressionType="Notify"
+                  name="FolderPath">testblobcontainer</property>
+                <property
+                  dataType="System.String"
+                  description="File Name"
+                  expressionType="Notify"
+                  name="FileName">test7.csv</property>
+                <property
+                  dataType="System.Int32"
+                  description="File Format"
+                  name="FileFormat">0</property>
+                <property
+                  dataType="System.String"
+                  description="The character used to delimit columns in a file"
+                  name="ColumnDelimiter">,</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Column names in the first data row"
+                  expressionType="Notify"
+                  name="FirstRowAsColumnNames">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Compress File"
+                  name="CompressFile">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Compress Type"
+                  name="CompressionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Compress Level"
+                  name="CompressionLevel">0</property>
+                <property
+                  dataType="System.String"
+                  description="The character used to separate rows in a file"
+                  name="RowDelimiter">\r\n</property>
+                <property
+                  dataType="System.String"
+                  description="The special character used to escape a column delimiter in the content of input file"
+                  name="EscapeChar"></property>
+                <property
+                  dataType="System.String"
+                  description="The character used to quote a string value"
+                  name="QuoteChar"></property>
+                <property
+                  dataType="System.String"
+                  description="One or more characters used to represent a null value"
+                  name="NullValue">\N</property>
+                <property
+                  dataType="System.String"
+                  description="Specify the encoding name"
+                  name="EncodingName">UTF-8</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the number of non-empty rows to skip when reading data from input files"
+                  expressionType="Notify"
+                  name="SkipLineCount">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to treat null or empty string as a null value when reading data from an input file"
+                  name="TreatEmptyAsNull">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">ExtFileSource</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Flexible File Source.Connections[ConnectionManager]"
+                  connectionManagerID="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+                  connectionManagerRefId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+                  description="Connection manager name"
+                  name="ConnectionManager" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Flexible File Source.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Flexible File Source.Outputs[Output].Columns[DEPTNO]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Flexible File Source.Outputs[Output].ExternalColumns[DEPTNO]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Flexible File Source.Outputs[Output].Columns[DEPTNO]"
+                      name="DEPTNO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Flexible File Source.Outputs[Output].Columns[DNAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Flexible File Source.Outputs[Output].ExternalColumns[DNAME]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Flexible File Source.Outputs[Output].Columns[DNAME]"
+                      name="DNAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Flexible File Source.Outputs[Output].Columns[LOC]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Flexible File Source.Outputs[Output].ExternalColumns[LOC]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Flexible File Source.Outputs[Output].Columns[LOC]"
+                      name="LOC"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flexible File Source.Outputs[Output].ExternalColumns[DEPTNO]"
+                      dataType="wstr"
+                      length="100"
+                      name="DEPTNO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flexible File Source.Outputs[Output].ExternalColumns[DNAME]"
+                      dataType="wstr"
+                      length="100"
+                      name="DNAME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flexible File Source.Outputs[Output].ExternalColumns[LOC]"
+                      dataType="wstr"
+                      length="100"
+                      name="LOC" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Flexible File Source.Outputs[Error output]"
+                  isErrorOut="true"
+                  name="Error output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Flexible File Source.Outputs[Error output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Flexible File Source.Outputs[Error output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Flexible File Source.Outputs[Error output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Flexible File Source.Outputs[Error output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Flexible File Source.Outputs[Error output].Columns[DEPTNO]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Flexible File Source.Outputs[Error output].Columns[DEPTNO]"
+                      name="DEPTNO" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Flexible File Source.Outputs[Error output].Columns[DNAME]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Flexible File Source.Outputs[Error output].Columns[DNAME]"
+                      name="DNAME" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Flexible File Source.Outputs[Error output].Columns[LOC]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Flexible File Source.Outputs[Error output].Columns[LOC]"
+                      name="LOC" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Output]"
+              endId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="Output"
+              startId="Package\Data Flow Task\Flexible File Source.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="129,137" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Data Flow Task\Flexible File Source"
+          TopLeft="171,67" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Data Flow Task\Flat File Destination"
+          TopLeft="185,161" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Output]"
+          TopLeft="255.5,109">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="15.5,52"
+              Start="0,0"
+              End="15.5,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22"
+                    Point2="0,26"
+                    Point3="4,26" />
+                  <mssgle:LineSegment
+                    End="11.5,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11.5,26"
+                    Point2="15.5,26"
+                    Point3="15.5,30" />
+                  <mssgle:LineSegment
+                    End="15.5,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Flexible File Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,374 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/14/2019 3:56:42 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MYLENOVOI7"
+  DTS:CreatorName="MYLENOVOI7\KameswaraSarma"
+  DTS:DTSID="{2F485E05-4D3C-4966-940F-2B2D79066E38}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{14B653D0-2A8A-41A8-9724-887247726213}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{8FD01AE6-111A-4BED-AEE0-D7CEE671B371}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\KameswaraSarma\Desktop\yyyy.xls;Extended Properties=&quot;Excel 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Power Query Connection Manager]"
+      DTS:CreationName="PowerQuery"
+      DTS:DTSID="{20DEE1D8-EFBD-4108-B0C6-DACB532A565E}"
+      DTS:ObjectName="Power Query Connection Manager">
+      <DTS:ObjectData>
+        <ConnectionManager
+          ConnectionString="[{&quot;kind&quot;:&quot;File&quot;,&quot;path&quot;:&quot;c:\\azure\\employees.csv&quot;,&quot;AuthenticationKind&quot;:&quot;Windows&quot;}]" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9E3A3AFA-5411-45CC-94B9-D7A5A11DDBC1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Excel Destination"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Excel Destination"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Excel_Destination</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Excel Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[EmpNo]"
+                      cachedDataType="i8"
+                      cachedName="EmpNo"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[EmpNo]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[EmpNo]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[Ename]"
+                      cachedDataType="nText"
+                      cachedName="Ename"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Ename]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[Ename]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[Salary]"
+                      cachedDataType="i8"
+                      cachedName="Salary"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Salary]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[Salary]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[DeptNo]"
+                      cachedDataType="i8"
+                      cachedName="DeptNo"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[DeptNo]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[DeptNo]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[EmpNo]"
+                      dataType="r8"
+                      name="EmpNo" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Ename]"
+                      dataType="nText"
+                      name="Ename" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Salary]"
+                      dataType="r8"
+                      name="Salary" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[DeptNo]"
+                      dataType="r8"
+                      name="DeptNo" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Power Query Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              description="Power Query Source"
+              name="Power Query Source">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode of the query."
+                  name="QueryMode"
+                  typeConverter="Microsoft.SqlServer.IntegrationServices.PowerQuery.TypeConverters.QueryModeTypeConverter, Microsoft.SqlServer.IntegrationServices.PowerQuery, Version=14.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">0</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the M query to be executed."
+                  name="SingleQueryVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The single M query to be executed."
+                  name="SingleQueryText"
+                  state="cdata"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"><![CDATA[let
+    Source = Csv.Document(File.Contents("C:\Azure\Employees.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"EmpNo", Int64.Type}, {"Ename", type text}, {"Salary", Int64.Type}, {"DeptNo", Int64.Type}})
+in
+    #"Changed Type"]]></property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.PowerQuerySource</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Power Query Source.Connections[Connection]"
+                  connectionManagerID="Package.ConnectionManagers[Power Query Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Power Query Connection Manager]"
+                  name="Connection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Power Query Source.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[EmpNo]"
+                      dataType="i8"
+                      externalMetadataColumnId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[EmpNo]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[EmpNo]"
+                      name="EmpNo" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[Ename]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[Ename]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[Ename]"
+                      name="Ename" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[Salary]"
+                      dataType="i8"
+                      externalMetadataColumnId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[Salary]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[Salary]"
+                      name="Salary" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[DeptNo]"
+                      dataType="i8"
+                      externalMetadataColumnId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[DeptNo]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[DeptNo]"
+                      name="DeptNo" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[EmpNo]"
+                      dataType="i8"
+                      name="EmpNo" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[Ename]"
+                      dataType="nText"
+                      name="Ename" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[Salary]"
+                      dataType="i8"
+                      name="Salary" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[DeptNo]"
+                      dataType="i8"
+                      name="DeptNo" />
+                  </externalMetadataColumns>
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Output]"
+              endId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]"
+              name="Output"
+              startId="Package\Data Flow Task\Power Query Source.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="222,153" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Data Flow Task\Power Query Source"
+          TopLeft="222,48" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Data Flow Task\Excel Destination"
+          TopLeft="243,154" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Output]"
+          TopLeft="309.5,90">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="13,64"
+              Start="0,0"
+              End="13,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="4,32" />
+                  <mssgle:LineSegment
+                    End="9,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="9,32"
+                    Point2="13,32"
+                    Point3="13,36" />
+                  <mssgle:LineSegment
+                    End="13,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Excel Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

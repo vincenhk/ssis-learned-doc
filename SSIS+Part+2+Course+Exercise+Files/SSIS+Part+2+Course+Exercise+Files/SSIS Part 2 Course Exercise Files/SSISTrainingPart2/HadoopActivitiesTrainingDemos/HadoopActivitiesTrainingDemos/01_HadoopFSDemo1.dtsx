@@ -1,0 +1,469 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/16/2019 12:28:50 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ITACADEMY"
+  DTS:CreatorName="ITACADEMY\KameswaraSarma"
+  DTS:DTSID="{788F80A3-0311-4CAF-B1F1-01E1ED2B72F1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="01_HadoopFSDemo1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{43A557A8-A4F8-4AD5-A4BC-DC566D5E7FBE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Employee.csv]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{0341BE7F-82E0-4780-B8EC-E6F185FE5D65}"
+      DTS:ObjectName="Employee.csv">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\KameswaraSarma\Desktop\Employee.csv" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FromHadoopEmployee.csv]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{FD14F53D-DFC2-4E3F-89A0-578211FF322B}"
+      DTS:ObjectName="FromHadoopEmployee.csv">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\Users\KameswaraSarma\Desktop\FromHadoopEmployee.csv" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Hadoop Connection Manager]"
+      DTS:CreationName="Hadoop"
+      DTS:DTSID="{09A92846-6C78-4735-8362-BE5F7E58F5D2}"
+      DTS:ObjectName="Hadoop Connection Manager">
+      <DTS:ObjectData>
+        <HadoopConnectionManager
+          ConnectionString="WebHdfsHost=192.168.160.128;WebHdfsPort=50070;WebHdfsUserName=maria_dev;WebHCatHost=192.168.160.128;WebHCatPort=50111;WebHCatUser=maria_dev;EnableWebHdfs=True;EnableWebHCat=True;WebHdfsAuthType=Basic;WebHdfsDomain=;WebHCatAuthType=Basic;WebHCatDomain=;WebHdfsIsHttps=False;WebHCatIsHttps=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Copy From HDFS"
+      DTS:CreationName="HadoopFileSystemTask"
+      DTS:Description="Hadoop File System Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{02A97C65-4CBF-4690-BA16-40794CFFA7FF}"
+      DTS:ExecutableType="HadoopFileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copy From HDFS"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HadoopFileSystemTask
+          LocalFilePathId="{FD14F53D-DFC2-4E3F-89A0-578211FF322B}"
+          HadoopConnectionId="{09A92846-6C78-4735-8362-BE5F7E58F5D2}"
+          Operation="CopyFromHDFS"
+          IsOverwrite="True"
+          HadoopFilePath="/demo/Employee.csv"
+          HadoopFileType="File" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Copy To HDFS"
+      DTS:CreationName="HadoopFileSystemTask"
+      DTS:Description="Hadoop File System Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{8CDF9E5E-2D63-46ED-B40A-6BF9B575DA41}"
+      DTS:ExecutableType="HadoopFileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copy To HDFS"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HadoopFileSystemTask
+          LocalFilePathId="{0341BE7F-82E0-4780-B8EC-E6F185FE5D65}"
+          HadoopConnectionId="{09A92846-6C78-4735-8362-BE5F7E58F5D2}"
+          Operation="CopyToHDFS"
+          IsOverwrite="True"
+          HadoopFilePath="/demo/Employee.csv"
+          HadoopFileType="File" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Copy With In HDFS"
+      DTS:CreationName="HadoopFileSystemTask"
+      DTS:Description="Hadoop File System Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{885BF929-17BF-4DC4-B22E-D1B4187EF63A}"
+      DTS:ExecutableType="HadoopFileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copy With In HDFS"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <HadoopFileSystemTask
+          HadoopDestFilePath="/demo/Employee2.csv"
+          HadoopDestFileType="File"
+          HadoopConnectionId="{09A92846-6C78-4735-8362-BE5F7E58F5D2}"
+          Operation="CopyWithinHDFS"
+          HadoopFilePath="/demo/Employee.csv"
+          HadoopFileType="File" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C4DE2400-9489-4F9F-803B-40BC3B77C62F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\HDFS File Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              description="Loads data into a file in HDFS. The supported file formats are: Text, Avro, Orc."
+              name="HDFS File Destination"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of HDFS file"
+                  expressionType="Notify"
+                  name="FilePath">/demo/Employee3.csv</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Column names in the first data row"
+                  expressionType="Notify"
+                  name="FirstRowAsColumnNames">true</property>
+                <property
+                  dataType="System.String"
+                  description="The character used to delimit columns in text file"
+                  expressionType="Notify"
+                  name="ColumnDelimiter">,</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Enable batch mode"
+                  expressionType="Notify"
+                  name="IsBatchMode">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Batch size"
+                  expressionType="Notify"
+                  name="BatchSize">10000</property>
+                <property
+                  dataType="System.Int32"
+                  description="File Format"
+                  expressionType="Notify"
+                  name="FileFormat">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">HdfsDest</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\HDFS File Destination.Connections[Hadoop Connection Manager]"
+                  connectionManagerID="Package.ConnectionManagers[Hadoop Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Hadoop Connection Manager]"
+                  name="Hadoop Connection Manager" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\HDFS File Destination.Inputs[Input]"
+                  hasSideEffects="true"
+                  name="Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\HDFS File Destination.Inputs[Input].Columns[Ecode]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Ecode"
+                      externalMetadataColumnId="Package\Data Flow Task\HDFS File Destination.Inputs[Input].ExternalColumns[Ecode]"
+                      lineageId="Package\Data Flow Task\HDFS File Source.Outputs[Output].Columns[Ecode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HDFS File Destination.Inputs[Input].Columns[Ename]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Ename"
+                      externalMetadataColumnId="Package\Data Flow Task\HDFS File Destination.Inputs[Input].ExternalColumns[Ename]"
+                      lineageId="Package\Data Flow Task\HDFS File Source.Outputs[Output].Columns[Ename]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HDFS File Destination.Inputs[Input].Columns[Salary]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Salary"
+                      externalMetadataColumnId="Package\Data Flow Task\HDFS File Destination.Inputs[Input].ExternalColumns[Salary]"
+                      lineageId="Package\Data Flow Task\HDFS File Source.Outputs[Output].Columns[Salary]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HDFS File Destination.Inputs[Input].ExternalColumns[Ecode]"
+                      dataType="wstr"
+                      length="100"
+                      name="Ecode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HDFS File Destination.Inputs[Input].ExternalColumns[Ename]"
+                      dataType="wstr"
+                      length="100"
+                      name="Ename" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HDFS File Destination.Inputs[Input].ExternalColumns[Salary]"
+                      dataType="wstr"
+                      length="100"
+                      name="Salary" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\HDFS File Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="MicrosoftContactInfo"
+              description="Extracts data from a file in HDFS. The supported file formats are: Text, Avro."
+              name="HDFS File Source"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of HDFS file"
+                  expressionType="Notify"
+                  name="FilePath">/demo/Employee.csv</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Column names in the first data row"
+                  expressionType="Notify"
+                  name="FirstRowAsColumnNames">true</property>
+                <property
+                  dataType="System.String"
+                  description="The character used to delimit columns in text file"
+                  name="ColumnDelimiter">,</property>
+                <property
+                  dataType="System.Int32"
+                  description="The character used to delimit columns in text file"
+                  name="FileFormat">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">HdfsSource</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\HDFS File Source.Connections[Hadoop Connection Manager]"
+                  connectionManagerID="Package.ConnectionManagers[Hadoop Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Hadoop Connection Manager]"
+                  description="It's used to connect Hadoop cluster"
+                  name="Hadoop Connection Manager" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\HDFS File Source.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\HDFS File Source.Outputs[Output].Columns[Ecode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\HDFS File Source.Outputs[Output].ExternalColumns[Ecode]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\HDFS File Source.Outputs[Output].Columns[Ecode]"
+                      name="Ecode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\HDFS File Source.Outputs[Output].Columns[Ename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\HDFS File Source.Outputs[Output].ExternalColumns[Ename]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\HDFS File Source.Outputs[Output].Columns[Ename]"
+                      name="Ename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\HDFS File Source.Outputs[Output].Columns[Salary]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\HDFS File Source.Outputs[Output].ExternalColumns[Salary]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\HDFS File Source.Outputs[Output].Columns[Salary]"
+                      name="Salary"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HDFS File Source.Outputs[Output].ExternalColumns[Ecode]"
+                      dataType="wstr"
+                      length="100"
+                      name="Ecode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HDFS File Source.Outputs[Output].ExternalColumns[Ename]"
+                      dataType="wstr"
+                      length="100"
+                      name="Ename" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HDFS File Source.Outputs[Output].ExternalColumns[Salary]"
+                      dataType="wstr"
+                      length="100"
+                      name="Salary" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\HDFS File Source.Outputs[Error output]"
+                  isErrorOut="true"
+                  name="Error output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\HDFS File Source.Outputs[Error output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\HDFS File Source.Outputs[Error output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\HDFS File Source.Outputs[Error output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\HDFS File Source.Outputs[Error output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\HDFS File Source.Outputs[Error output].Columns[Ecode]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\HDFS File Source.Outputs[Error output].Columns[Ecode]"
+                      name="Ecode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\HDFS File Source.Outputs[Error output].Columns[Ename]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\HDFS File Source.Outputs[Error output].Columns[Ename]"
+                      name="Ename" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\HDFS File Source.Outputs[Error output].Columns[Salary]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\HDFS File Source.Outputs[Error output].Columns[Salary]"
+                      name="Salary" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Output]"
+              endId="Package\Data Flow Task\HDFS File Destination.Inputs[Input]"
+              name="Output"
+              startId="Package\Data Flow Task\HDFS File Source.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Copy To HDFS"
+          TopLeft="121,38" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Copy From HDFS"
+          TopLeft="117,104" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Copy With In HDFS"
+          TopLeft="120,158" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="366,194" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Data Flow Task\HDFS File Source"
+          TopLeft="232,98" />
+        <NodeLayout
+          Size="181,42"
+          Id="Package\Data Flow Task\HDFS File Destination"
+          TopLeft="244,206" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Output]"
+          TopLeft="312,140">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="22.5,66"
+              Start="0,0"
+              End="22.5,58.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29"
+                    Point2="0,33"
+                    Point3="4,33" />
+                  <mssgle:LineSegment
+                    End="18.5,33" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.5,33"
+                    Point2="22.5,33"
+                    Point3="22.5,37" />
+                  <mssgle:LineSegment
+                    End="22.5,58.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\HDFS File Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\HDFS File Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

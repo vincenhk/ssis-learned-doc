@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSISTrainingPart2Demos", "SSISTrainingPart2Demos\SSISTrainingPart2Demos.dtproj", "{E35C4380-3780-4CFB-8678-9F76AE0BF320}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E35C4380-3780-4CFB-8678-9F76AE0BF320}.Development|Default.ActiveCfg = Development
+		{E35C4380-3780-4CFB-8678-9F76AE0BF320}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1F57A6B1-C8BA-4986-B2A1-FE3F76521C8B}
+	EndGlobalSection
+EndGlobal

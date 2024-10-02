@@ -1,0 +1,102 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/9/2019 4:28:45 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MYLENOVOI7"
+  DTS:CreatorName="MYLENOVOI7\KameswaraSarma"
+  DTS:DTSID="{47C6143A-020E-405D-BA5D-FF42EEC6BCC8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{27594BCC-474E-4B54-878C-7BEF1A6F14A6}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ADLS Connection Manager]"
+      DTS:CreationName="AzureDataLake"
+      DTS:DTSID="{3DB29F6A-D906-4B0F-A2E0-C6C69B607AE9}"
+      DTS:ObjectName="ADLS Connection Manager">
+      <DTS:ObjectData>
+        <HadoopConnectionManager
+          ConnectionString="WebHdfsHost=myssisdls.azuredatalakestore.net;WebHdfsPort=443;WebHdfsUserName=23ad424c-c014-47ed-a5f8-f8da73dd0412;WebHdfsAuthType=AzureADServiceIdentity;WebHdfsDomain=309c7359-0357-4b36-969f-6885cb2f5895;WebHdfsIsHttps=True;">
+          <WebHdfsPassWord
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQWTEWIIE9kSO2SaBd22e1QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADQFy4TuBmOnsfNcLcG9ezjq/7RYtHHAD8suLttf7MAmQAAAAAOgAAAAAIAACAAAADaPOlVa2J9hMA9ZwYattDLvEr1VfnonjKac0/GKxHkO1AAAAAZJGAjOJKeXWdcoIh+EjdznAdMJQtkX+uW/zaKf8v/Fxs9uQCztEAgfVLdwutWZow51ovHM86SuFmCDKjfyiDlcbHRz3VB6hSX23CSIkxYv0AAAABhBCmEhFwafONuwTUGeFaNTKTZYGMXLwNIBdlwDqdvc7q1JOPaDsWNDCc87KpsoqMqVJtZl24Yk4s1aTvUlcpy</WebHdfsPassWord>
+        </HadoopConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Azure Data Lake Store - Download Demo"
+      DTS:CreationName="AdlsTask"
+      DTS:Description="Azure Data Lake Store File System Task"
+      DTS:DTSID="{A1BBB7F4-BE16-4045-83BA-BC550C1183D8}"
+      DTS:ExecutableType="AdlsTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Azure Data Lake Store - Download Demo"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <AdlsTask
+          Operation="CopyFromADLS"
+          AzureDataLakeConnectionId="{3DB29F6A-D906-4B0F-A2E0-C6C69B607AE9}"
+          AzureDataLakeDirectory="myssisdls"
+          LocalDirectory="C:\Azure\Sample"
+          SearchRecursively="False"
+          FileNamePattern="*" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Azure Data Lake Store -Upload Demo"
+      DTS:CreationName="AdlsTask"
+      DTS:Description="Azure Data Lake Store File System Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{18DB0D1A-93DE-40F8-828B-2BA98BE929A2}"
+      DTS:ExecutableType="AdlsTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Azure Data Lake Store -Upload Demo"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <AdlsTask
+          Operation="CopyToADLS"
+          AzureDataLakeConnectionId="{3DB29F6A-D906-4B0F-A2E0-C6C69B607AE9}"
+          AzureDataLakeDirectory="myssisdls"
+          LocalDirectory="C:\Azure\Sample"
+          SearchRecursively="False"
+          FileNamePattern="test6.csv" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="272,42"
+          Id="Package\Azure Data Lake Store - Download Demo"
+          TopLeft="191,215" />
+        <NodeLayout
+          Size="255,42"
+          Id="Package\Azure Data Lake Store -Upload Demo"
+          TopLeft="168,117" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
